@@ -3,6 +3,7 @@ package com.example.mysimpletimer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -129,6 +130,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent openSettings = new Intent(this,SettingsActivity.class);
+            startActivity(openSettings);
+        } else if (id == R.id.action_about){
+            Intent openAbout = new Intent(this,AboutActivity.class);
+            startActivity(openAbout);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
