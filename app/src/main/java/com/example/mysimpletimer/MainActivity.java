@@ -1,10 +1,14 @@
 package com.example.mysimpletimer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
-                            R.raw.alarm_sound);
+                            R.raw.alarm_sound_xyl);
                     mediaPlayer.start();
                     resetTimer();
                 }
@@ -114,5 +118,17 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setEnabled(true);
         seekBar.setProgress(60);
         isTimerOn = false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.timer_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
