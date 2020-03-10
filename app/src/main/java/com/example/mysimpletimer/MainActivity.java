@@ -2,8 +2,10 @@ package com.example.mysimpletimer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -75,9 +77,24 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
-                            R.raw.alarm_sound_xyl);
-                    mediaPlayer.start();
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    if (sharedPreferences.getBoolean("enable_sound",true)){
+
+                        String melodyName = sharedPreferences.getString("timer_melody","xyl");
+                        if (melodyName.equals("xyl")){
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
+                                    R.raw.alarm_sound_xyl);
+                            mediaPlayer.start();
+                        } else if (melodyName.equals("clock")) {
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
+                                    R.raw.alarm_clock_sound);
+                            mediaPlayer.start();
+                        } else if (melodyName.equals("fire")) {
+                            MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
+                                    R.raw.fire_alarm_sound);
+                            mediaPlayer.start();
+                        }
+                    }
                     resetTimer();
                 }
             };

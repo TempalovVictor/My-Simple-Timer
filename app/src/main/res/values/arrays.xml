@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="pref_timer_melody_labels">
+
+        <item>Xyl</item>
+        <item>Clock</item>
+        <item>Fire</item>
+        
+    </array>
+    
+    <array name="pref_timer_melody_values">
+
+        <item>xyl</item>
+        <item>clock</item>
+        <item>fire</item>
+
+    </array>
+
+</resources>
