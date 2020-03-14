@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBoxPreference
 
@@ -17,7 +18,12 @@
         android:defaultValue="alarm_sound_xyl"
         android:entries="@array/pref_timer_melody_labels"
         android:entryValues="@array/pref_timer_melody_values"
+        />
 
+    <EditTextPreference
+        app:title="Default interval"
+        android:key="default_interval"
+        android:defaultValue="60"
         />
 
 </PreferenceScreen>

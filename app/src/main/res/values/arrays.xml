@@ -3,7 +3,7 @@
 
     <array name="pref_timer_melody_labels">
 
-        <item>Xyl</item>
+        <item>Xylophone</item>
         <item>Clock</item>
         <item>Fire</item>
         
@@ -11,7 +11,7 @@
     
     <array name="pref_timer_melody_values">
 
-        <item>xyl</item>
+        <item>xylophone</item>
         <item>clock</item>
         <item>fire</item>
 

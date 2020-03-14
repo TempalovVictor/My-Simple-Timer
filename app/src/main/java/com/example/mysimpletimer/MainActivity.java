@@ -2,6 +2,7 @@ package com.example.mysimpletimer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
@@ -16,14 +17,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private SeekBar seekBar;
     private TextView textView;
     private boolean isTimerOn;
     private Button button;
     private CountDownTimer countDownTimer;
+    private int defaultInterval;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         seekBar = findViewById(R.id.seekBar);
         textView = findViewById(R.id.textView);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         seekBar.setMax(600);
-        seekBar.setProgress(60);
         isTimerOn = false;
+        setIntervalFromSharedPreferences(sharedPreferences);
 
         button = findViewById(R.id.button);
 
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     public void start(View view) {
@@ -80,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     if (sharedPreferences.getBoolean("enable_sound",true)){
 
-                        String melodyName = sharedPreferences.getString("timer_melody","xyl");
-                        if (melodyName.equals("xyl")){
+                        String melodyName = sharedPreferences.getString("timer_melody","xylophone");
+                        if (melodyName.equals("xylophone")){
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
                                     R.raw.alarm_sound_xyl);
                             mediaPlayer.start();
@@ -131,11 +139,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void resetTimer() {
         countDownTimer.cancel();
-        textView.setText("01:00");
         button.setText("START");
         seekBar.setEnabled(true);
-        seekBar.setProgress(60);
         isTimerOn = false;
+        setIntervalFromSharedPreferences(sharedPreferences);
     }
 
     @Override
@@ -157,5 +164,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setIntervalFromSharedPreferences (SharedPreferences sharedPreferences) {
+
+        defaultInterval = Integer.valueOf(sharedPreferences
+                .getString("default_interval","60"));
+        long defaultIntervalMillis = defaultInterval*1000;
+        updateTimer(defaultIntervalMillis);
+        seekBar.setProgress(defaultInterval);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if(key.equals("default_interval")){
+            setIntervalFromSharedPreferences(sharedPreferences);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 }
