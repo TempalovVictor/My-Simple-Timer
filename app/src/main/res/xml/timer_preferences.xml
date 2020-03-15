@@ -6,14 +6,14 @@
 
         android:defaultValue="true"
         android:key="enable_sound"
-        android:title="Enable_sound"
+        android:title="Enable sound"
         android:summaryOff="Sound Disable"
         android:summaryOn="Sound Enable"
         />
 
     <ListPreference
 
-        android:title="Timer_Melody"
+        android:title="Timer ringtone"
         android:key="timer_melody"
         android:defaultValue="alarm_sound_xyl"
         android:entries="@array/pref_timer_melody_labels"
@@ -21,7 +21,7 @@
         />
 
     <EditTextPreference
-        app:title="Default interval"
+        app:title="Default timer time in seconds"
         android:key="default_interval"
         android:defaultValue="60"
         />

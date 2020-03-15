@@ -93,11 +93,11 @@ public class MainActivity extends AppCompatActivity
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
                                     R.raw.alarm_sound_xyl);
                             mediaPlayer.start();
-                        } else if (melodyName.equals("clock")) {
+                        } else if (melodyName.equals("ringing")) {
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
                                     R.raw.alarm_clock_sound);
                             mediaPlayer.start();
-                        } else if (melodyName.equals("fire")) {
+                        } else if (melodyName.equals("fire_alarm")) {
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(),
                                     R.raw.fire_alarm_sound);
                             mediaPlayer.start();

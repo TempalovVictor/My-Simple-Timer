@@ -4,16 +4,16 @@
     <array name="pref_timer_melody_labels">
 
         <item>Xylophone</item>
-        <item>Clock</item>
-        <item>Fire</item>
+        <item>Ringing</item>
+        <item>Fire alarm</item>
         
     </array>
     
     <array name="pref_timer_melody_values">
 
         <item>xylophone</item>
-        <item>clock</item>
-        <item>fire</item>
+        <item>ringing</item>
+        <item>fire_alarm</item>
 
     </array>
 
